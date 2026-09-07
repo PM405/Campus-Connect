@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Course Join Requests | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+   <!---- <nav class="navbar">
+
+        <div class="nav-brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            CampusConnect
+        </div>
+
+        <div class="nav-user">
+
+            <span>
+                <i class="fa-solid fa-user-tie"></i>
+                <%= userName %>
+            </span>
+
+            <a href="/teacher/dashboard">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </nav>-->
+
+
+    <main class="requests-page">
+
+        <div class="page-header">
+
+            <div>
+                <span class="section-label">
+                    COURSE MANAGEMENT
+                </span>
+
+                <h1>
+                    <i class="fa-solid fa-user-plus"></i>
+                    Course Join Requests
+                </h1>
+
+                <p>
+                    Review and manage student requests to join your courses.
+                </p>
+            </div>
+
+            <a
+                href="/teacher/dashboard"
+                class="back-btn"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <% if (requests && requests.length > 0) { %>
+
+            <div class="request-list">
+
+                <% requests.forEach(request => { %>
+
+                    <div class="request-card">
+
+                        <div class="request-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+
+                        <div class="request-info">
+
+                            <h2>
+                                <%= request.student.name %>
+                            </h2>
+
+                            <p>
+                                <i class="fa-solid fa-envelope"></i>
+                                <%= request.student.email %>
+                            </p>
+
+
+                            <div class="request-course">
+
+                                <span>
+                                    <i class="fa-solid fa-book"></i>
+                                    <%= request.course.courseName %>
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                    <%= request.course.subject %>
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-date">
+
+                                <i class="fa-solid fa-calendar"></i>
+
+                                Requested on
+
+                                <%= new Date(
+                                    request.requestedAt
+                                ).toLocaleDateString() %>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="request-actions">
+
+                            <form
+                                action="/teacher/course-requests/<%= request._id %>/accept"
+                                method="POST"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="accept-btn"
+                                >
+                                    <i class="fa-solid fa-check"></i>
+                                    Accept
+                                </button>
+
+                            </form>
+
+
+                            <form
+                                action="/teacher/course-requests/<%= request._id %>/reject"
+                                method="POST"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="reject-btn"
+                                >
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Reject
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="empty-requests">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-user-clock"></i>
+                </div>
+
+                <h2>
+                    No Pending Requests
+                </h2>
+
+                <p>
+                    Student join requests will appear here when someone
+                    requests to join your course.
+                </p>
+
+                <a
+                    href="/teacher/dashboard"
+                    class="dashboard-btn"
+                >
+                    <i class="fa-solid fa-house"></i>
+                    Go to Dashboard
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+                Developed & Designed by
+
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+            </p>
+
+            <p class="footer-copyright">
+                © 2026 CampusConnect. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+</body>
+</html>

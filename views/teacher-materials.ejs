@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Study Materials - CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<div class="materials-page">
+
+    <div class="materials-container">
+
+        <div class="materials-header">
+
+            <div>
+
+                <a
+                    href="/teacher/dashboard"
+                    class="material-dashboard-btn"
+                >
+                    <i class="fa-solid fa-house"></i>
+                    Teacher Dashboard
+                </a>
+
+                <h1>
+                    Study Materials
+                </h1>
+
+                <p>
+                    Manage, edit and share learning resources with your students.
+                </p>
+
+            </div>
+
+            <a
+                href="/teacher/materials/create"
+                class="add-material-btn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Material
+            </a>
+
+        </div>
+
+
+        <% if (materials && materials.length > 0) { %>
+
+            <div class="materials-grid">
+
+                <% materials.forEach(material => { %>
+
+                    <div class="material-card">
+
+                        <div class="material-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+
+                        <h2>
+                            <%= material.title %>
+                        </h2>
+
+
+                        <p class="material-description">
+                            <%= material.description %>
+                        </p>
+
+
+                        <div class="material-course">
+
+                            <strong>
+                                Course:
+                            </strong>
+
+                            <%= material.course
+                                ? material.course.courseName
+                                : "Course"
+                            %>
+
+                        </div>
+
+
+                        <div class="material-subject">
+
+                            <strong>
+                                Subject:
+                            </strong>
+
+                            <%= material.course
+                                ? material.course.subject
+                                : "Subject"
+                            %>
+
+                        </div>
+
+
+                        <div class="material-actions">
+
+                            <a
+                                href="/teacher/materials/<%= material._id %>/edit"
+                                class="edit-material-btn"
+                            >
+                                <i class="fa-solid fa-pen"></i>
+                                Edit
+                            </a>
+
+
+                            <a
+                                href="<%= material.materialLink %>"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="view-material-btn"
+                            >
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                View Material
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+
+        <% } else { %>
+
+            <div class="materials-empty">
+
+                <div class="empty-material-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+
+                <h2>
+                    No Study Materials Yet
+                </h2>
+
+
+                <p>
+                    Start by adding study material for one of your courses.
+                </p>
+
+
+                <a
+                    href="/teacher/materials/create"
+                    class="add-material-btn"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Add First Material
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

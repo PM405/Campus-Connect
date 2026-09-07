@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        <%= course.courseName %> - CampusConnect
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="course-details-page">
+
+        <div class="course-details-container">
+
+
+            <a
+                href="<%= isTeacher ? '/teacher/dashboard' : '/student/dashboard' %>"
+                class="course-back-btn"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+
+            <!-- Course Hero -->
+            <div class="course-hero">
+
+                <div class="course-icon">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                </div>
+
+
+                <div class="course-main-info">
+
+                    <span class="course-label">
+                        COURSE
+                    </span>
+
+                    <h1>
+                        <%= course.courseName %>
+                    </h1>
+
+                    <p>
+                        <%= course.subject %>
+                    </p>
+
+
+                    <div class="course-teacher">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                        <strong style="color: rgb(33, 43, 230);">
+                            Teacher:
+                        </strong>
+
+                        <p style="color: rgb(0, 0, 0);">
+                            <%= course.teacher.name %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Course Information -->
+            <div class="course-info-grid">
+
+
+                <% if (isTeacher) { %>
+
+                    <div class="course-info-card">
+
+                        <span>
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Course Key
+                            </small>
+
+                            <strong>
+                                <%= course.courseKey %>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-info-card">
+
+                        <span>
+                            <i class="fa-solid fa-users"></i>
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Total Students
+                            </small>
+
+                            <strong>
+                                <%= course.students.length %>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+
+                <div class="course-info-card">
+
+                    <span>
+                        <i class="fa-solid fa-calendar-plus"></i>
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Start Date
+                        </small>
+
+                        <strong>
+                            <%= new Date(
+                                course.startDate
+                            ).toLocaleDateString() %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="course-info-card">
+
+                    <span>
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </span>
+
+                    <div>
+
+                        <small>
+                            End Date
+                        </small>
+
+                        <strong>
+                            <%= new Date(
+                                course.endDate
+                            ).toLocaleDateString() %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Course Content Heading -->
+            <div class="course-section-title">
+
+                <span>
+                    COURSE CONTENT
+                </span>
+
+                <h2>
+                    <%= isStudent
+                        ? "Your Course Content"
+                        : "Manage Course Content"
+                    %>
+                </h2>
+
+            </div>
+
+
+            <!-- Course Features -->
+            <div class="course-features-grid">
+
+
+                <!-- Study Materials -->
+                <a
+                    href="#study-materials"
+                    class="course-feature-card"
+                >
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Study Materials
+                        </h3>
+
+                        <p>
+                            Notes, PDFs and learning resources
+                        </p>
+
+                    </div>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Assignments -->
+                <a
+                    href="#assignments"
+                    class="course-feature-card"
+                >
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Assignments
+                        </h3>
+
+                        <p>
+                            View and submit course assignments
+                        </p>
+
+                    </div>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Quizzes -->
+                <a
+                    href="#quizzes"
+                    class="course-feature-card"
+                >
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-brain"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Quizzes
+                        </h3>
+
+                        <p>
+                            Test your knowledge
+                        </p>
+
+                    </div>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Discussions -->
+                <a
+                    href="#discussions"
+                    class="course-feature-card"
+                >
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Discussions
+                        </h3>
+
+                        <p>
+                            Ask questions and discuss topics
+                        </p>
+
+                    </div>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Notices -->
+                <% if (isTeacher) { %>
+
+                    <a
+                        href="/teacher/notices"
+                        class="course-feature-card"
+                    >
+
+                <% } else { %>
+
+                    <a
+                        href="/student/notices"
+                        class="course-feature-card"
+                    >
+
+                <% } %>
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Notices
+                        </h3>
+
+                        <p>
+                            Important course announcements
+                        </p>
+
+                    </div>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- Online Classes -->
+                <% if (isTeacher) { %>
+
+                    <a
+                        href="/teacher/online-classes"
+                        class="course-feature-card"
+                    >
+
+                <% } else { %>
+
+                    <a
+                        href="/student/online-classes"
+                        class="course-feature-card"
+                    >
+
+                <% } %>
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Online Classes
+                        </h3>
+
+                        <p>
+                            Attend live online classes
+                        </p>
+
+                    </div>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- Study Materials -->
+            <section
+                id="study-materials"
+                class="course-content-section"
+            >
+
+                <div class="content-section-header">
+
+                    <div>
+
+                        <span>
+                            STUDY MATERIALS
+                        </span>
+
+                        <h2>
+                            Learning Resources
+                        </h2>
+
+                    </div>
+
+
+                    <% if (isTeacher) { %>
+
+                        <a
+                            href="/teacher/materials/create"
+                            class="content-add-btn"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Add Material
+
+                        </a>
+
+                    <% } %>
+
+                </div>
+
+
+                <% if (
+                    materials &&
+                    materials.length > 0
+                ) { %>
+
+                    <div class="course-content-grid">
+
+                        <% materials.forEach(material => { %>
+
+                            <div class="course-content-card">
+
+                                <div class="content-card-icon material-card-icon">
+
+                                    <i class="fa-solid fa-book"></i>
+
+                                </div>
+
+
+                                <div class="content-card-body">
+
+                                    <h3>
+                                        <%= material.title %>
+                                    </h3>
+
+                                    <p>
+                                        <%= material.description %>
+                                    </p>
+
+
+                                    <span class="content-date">
+
+                                        <i class="fa-regular fa-calendar"></i>
+
+                                        <%= new Date(
+                                            material.createdAt
+                                        ).toLocaleDateString() %>
+
+                                    </span>
+
+
+                                    <a
+                                        href="<%= material.materialLink %>"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="content-view-btn"
+                                    >
+
+                                        View Material
+
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="course-empty-content">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        <h3>
+                            No Study Materials Yet
+                        </h3>
+
+                        <p>
+                            Study materials for this course will appear here.
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </section>
+
+
+            <!-- Assignments -->
+            <section
+                id="assignments"
+                class="course-content-section"
+            >
+
+                <div class="content-section-header">
+
+                    <div>
+
+                        <span>
+                            ASSIGNMENTS
+                        </span>
+
+                        <h2>
+                            Course Assignments
+                        </h2>
+
+                    </div>
+
+
+                    <% if (isTeacher) { %>
+
+                        <a
+                            href="/teacher/assignments/create"
+                            class="content-add-btn"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Create Assignment
+
+                        </a>
+
+                    <% } %>
+
+                </div>
+
+
+                <% if (
+                    assignments &&
+                    assignments.length > 0
+                ) { %>
+
+                    <div class="course-content-grid">
+
+                        <% assignments.forEach(assignment => { %>
+
+                            <div class="course-content-card">
+
+                                <div class="content-card-icon assignment-card-icon">
+
+                                    <i class="fa-solid fa-file-lines"></i>
+
+                                </div>
+
+
+                                <div class="content-card-body">
+
+                                    <h3>
+                                        <%= assignment.title %>
+                                    </h3>
+
+                                    <p>
+                                        <%= assignment.description %>
+                                    </p>
+
+
+                                    <div class="assignment-due-date">
+
+                                        <i class="fa-solid fa-clock"></i>
+
+                                        Due:
+
+                                        <strong>
+
+                                            <%= new Date(
+                                                assignment.dueDate
+                                            ).toLocaleDateString() %>
+
+                                        </strong>
+
+                                    </div>
+
+
+                                    <% if (isStudent) { %>
+
+                                        <a
+                                            href="/student/assignments/<%= assignment._id %>"
+                                            class="content-view-btn"
+                                        >
+
+                                            View Assignment
+
+                                            <i class="fa-solid fa-arrow-right"></i>
+
+                                        </a>
+
+                                    <% } else { %>
+
+                                        <a
+                                            href="/teacher/assignments/<%= assignment._id %>/submissions"
+                                            class="content-view-btn"
+                                        >
+
+                                            View Submissions
+
+                                            <i class="fa-solid fa-arrow-right"></i>
+
+                                        </a>
+
+                                    <% } %>
+
+                                </div>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="course-empty-content">
+
+                        <i class="fa-solid fa-file-circle-xmark"></i>
+
+                        <h3>
+                            No Assignments Yet
+                        </h3>
+
+                        <p>
+                            Assignments for this course will appear here.
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </section>
+
+
+            <!-- Quizzes -->
+            <section
+                id="quizzes"
+                class="course-content-section"
+            >
+
+                <div class="content-section-header">
+
+                    <div>
+
+                        <span>
+                            QUIZZES
+                        </span>
+
+                        <h2>
+                            Course Quizzes
+                        </h2>
+
+                    </div>
+
+
+                    <% if (isTeacher) { %>
+
+                        <a
+                            href="/teacher/quizzes/create"
+                            class="content-add-btn"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Create Quiz
+
+                        </a>
+
+                    <% } %>
+
+                </div>
+
+
+                <% if (
+                    quizzes &&
+                    quizzes.length > 0
+                ) { %>
+
+                    <div class="course-content-grid">
+
+                        <% quizzes.forEach(quiz => { %>
+
+                            <div class="course-content-card">
+
+                                <div class="content-card-icon quiz-card-icon">
+
+                                    <i class="fa-solid fa-brain"></i>
+
+                                </div>
+
+
+                                <div class="content-card-body">
+
+                                    <h3>
+                                        <%= quiz.title %>
+                                    </h3>
+
+                                    <p>
+                                        <%= quiz.description %>
+                                    </p>
+
+
+                                    <div class="quiz-info-row">
+
+                                        <span>
+
+                                            <i class="fa-solid fa-list-check"></i>
+
+                                            <%= quiz.questions.length %>
+
+                                            Questions
+
+                                        </span>
+
+
+                                        <span>
+
+                                            <i class="fa-solid fa-star"></i>
+
+                                            <%= quiz.questions.reduce(
+                                                (total, question) =>
+                                                    total +
+                                                    Number(
+                                                        question.marks || 0
+                                                    ),
+                                                0
+                                            ) %>
+
+                                            Marks
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <span class="content-date">
+
+                                        <i class="fa-regular fa-calendar"></i>
+
+                                        <%= new Date(
+                                            quiz.createdAt
+                                        ).toLocaleDateString() %>
+
+                                    </span>
+
+
+                                    <% if (isStudent) { %>
+
+                                        <a
+                                            href="/student/quizzes/<%= quiz._id %>"
+                                            class="content-view-btn"
+                                        >
+
+                                            Attempt Quiz
+
+                                            <i class="fa-solid fa-arrow-right"></i>
+
+                                        </a>
+
+                                    <% } else { %>
+
+                                        <a
+                                            href="/teacher/quizzes/<%= quiz._id %>"
+                                            class="content-view-btn"
+                                        >
+
+                                            Manage Quiz
+
+                                            <i class="fa-solid fa-arrow-right"></i>
+
+                                        </a>
+
+                                    <% } %>
+
+                                </div>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="course-empty-content">
+
+                        <i class="fa-solid fa-brain"></i>
+
+                        <h3>
+                            No Quizzes Yet
+                        </h3>
+
+                        <p>
+                            Quizzes for this course will appear here.
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </section>
+
+
+            <!-- Discussions -->
+            <section
+                id="discussions"
+                class="course-content-section"
+            >
+
+                <div class="content-section-header">
+
+                    <div>
+
+                        <span>
+                            DISCUSSIONS
+                        </span>
+
+                        <h2>
+                            Course Discussions
+                        </h2>
+
+                    </div>
+
+
+                    <% if (isStudent) { %>
+
+                        <a
+                            href="/student/discussions/create"
+                            class="content-add-btn"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Start Discussion
+
+                        </a>
+
+                    <% } %>
+
+                </div>
+
+
+                <% if (
+                    discussions &&
+                    discussions.length > 0
+                ) { %>
+
+                    <div class="course-content-grid">
+
+                        <% discussions.forEach(discussion => { %>
+
+                            <div class="course-content-card">
+
+                                <div class="content-card-icon">
+
+                                    <i class="fa-solid fa-comments"></i>
+
+                                </div>
+
+
+                                <div class="content-card-body">
+
+                                    <h3>
+                                        <%= discussion.title %>
+                                    </h3>
+
+                                    <p>
+                                        <%= discussion.description %>
+                                    </p>
+
+
+                                    <div class="quiz-info-row">
+
+                                        <span>
+
+                                            <i class="fa-solid fa-user"></i>
+
+                                            <%= discussion.student
+                                                ? discussion.student.name
+                                                : "Student"
+                                            %>
+
+                                        </span>
+
+
+                                        <span>
+
+                                            <i class="fa-solid fa-reply"></i>
+
+                                            <%= discussion.replies
+                                                ? discussion.replies.length
+                                                : 0
+                                            %>
+
+                                            Replies
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <span class="content-date">
+
+                                        <i class="fa-regular fa-calendar"></i>
+
+                                        <%= new Date(
+                                            discussion.createdAt
+                                        ).toLocaleDateString() %>
+
+                                    </span>
+
+
+                                    <a
+                                        href="/discussions/<%= discussion._id %>"
+                                        class="content-view-btn"
+                                    >
+
+                                        View Discussion
+
+                                        <i class="fa-solid fa-arrow-right"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="course-empty-content">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                        <h3>
+                            No Discussions Yet
+                        </h3>
+
+                        <p>
+                            No questions or discussions have been started
+                            for this course yet.
+                        </p>
+
+
+                        <% if (isStudent) { %>
+
+                            <a
+                                href="/student/discussions/create"
+                                class="content-add-btn"
+                            >
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                Start First Discussion
+
+                            </a>
+
+                        <% } %>
+
+                    </div>
+
+                <% } %>
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

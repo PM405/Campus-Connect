@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Attempt Quiz | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<div class="quiz-attempt-page">
+
+    <div class="quiz-attempt-container">
+
+        <a
+            href="/course/<%= course._id %>"
+            class="quiz-back-btn"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Course
+        </a>
+
+
+        <div class="quiz-attempt-header">
+
+            <div class="quiz-attempt-icon">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+
+            <div>
+
+                <span class="quiz-label">
+                    QUIZ
+                </span>
+
+                <h1>
+                    <%= quiz.title %>
+                </h1>
+
+                <p>
+                    <%= quiz.description %>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quiz-attempt-info">
+
+            <div>
+                <i class="fa-solid fa-book"></i>
+                <span>Course</span>
+                <strong>
+                    <%= course.courseName %>
+                </strong>
+            </div>
+
+
+            <div>
+                <i class="fa-solid fa-list-check"></i>
+                <span>Questions</span>
+                <strong>
+                    <%= quiz.questions.length %>
+                </strong>
+            </div>
+
+
+            <div>
+                <i class="fa-solid fa-star"></i>
+                <span>Total Marks</span>
+                <strong>
+                    <%= quiz.questions.reduce(
+                        (total, question) => total + Number(question.marks || 0),
+                        0
+                    ) %>
+                </strong>
+            </div>
+
+        </div>
+
+
+        <form
+            action="/student/quizzes/<%= quiz._id %>/submit"
+            method="POST"
+            class="quiz-form"
+        >
+
+            <% quiz.questions.forEach((question, index) => { %>
+
+                <div class="quiz-question-card">
+
+                    <div class="question-number">
+                        Question <%= index + 1 %>
+                    </div>
+
+
+                    <h2>
+                        <%= question.question %>
+                    </h2>
+
+
+                    <div class="question-marks">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        <%= question.marks || 1 %>
+                        mark(s)
+
+                    </div>
+
+
+                    <div class="quiz-options">
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_<%= index %>"
+                                value="1"
+                                required
+                            >
+
+                            <span class="option-number">
+                                A
+                            </span>
+
+                            <span>
+                                <%= question.options[0] %>
+                            </span>
+
+                        </label>
+
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_<%= index %>"
+                                value="2"
+                            >
+
+                            <span class="option-number">
+                                B
+                            </span>
+
+                            <span>
+                                <%= question.options[1] %>
+                            </span>
+
+                        </label>
+
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_<%= index %>"
+                                value="3"
+                            >
+
+                            <span class="option-number">
+                                C
+                            </span>
+
+                            <span>
+                                <%= question.options[2] %>
+                            </span>
+
+                        </label>
+
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_<%= index %>"
+                                value="4"
+                            >
+
+                            <span class="option-number">
+                                D
+                            </span>
+
+                            <span>
+                                <%= question.options[3] %>
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+
+            <div class="quiz-submit-section">
+
+                <p>
+                    <i class="fa-solid fa-circle-info"></i>
+                    Select one answer for every question before submitting.
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="submit-quiz-btn"
+                >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Submit Quiz
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

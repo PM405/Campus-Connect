@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Assignments - CampusConnect</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Assignments</h1>
+
+        <a href="/student/dashboard">← Back to Dashboard</a>
+
+        <% if (assignments.length === 0) { %>
+            <p>No assignments available.</p>
+        <% } %>
+
+        <% assignments.forEach(assignment => { %>
+            <div class="assignment-card">
+
+                <h2><%= assignment.title %></h2>
+
+                <p>
+                    <strong>Course:</strong>
+                    <%= assignment.course.courseName %>
+                </p>
+
+                <p>
+                    <strong>Subject:</strong>
+                    <%= assignment.course.subject %>
+                </p>
+
+                <p>
+                    <strong>Due Date:</strong>
+                    <%= new Date(assignment.dueDate).toLocaleDateString() %>
+                </p>
+
+                <a href="/student/assignments/<%= assignment._id %>">
+                    View Assignment
+                </a>
+
+            </div>
+        <% }) %>
+
+    </div>
+
+</body>
+</html>

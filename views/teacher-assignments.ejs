@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Teacher Assignments | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        .teacher-assignment-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .edit-assignment-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #dbeafe;
+            transition: 0.2s ease;
+        }
+
+        .edit-assignment-btn:hover {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .view-submissions-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        @media (max-width: 700px) {
+            .teacher-assignment-actions {
+                width: 100%;
+            }
+
+            .edit-assignment-btn,
+            .view-submissions-btn {
+                flex: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="teacher-assignments-page">
+
+        <div class="teacher-assignments-container">
+
+            <a
+                href="/teacher/dashboard"
+                class="teacher-assignment-back"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+
+            <div class="teacher-assignments-header">
+
+                <div>
+
+                    <span>
+                        TEACHER PORTAL
+                    </span>
+
+                    <h1>
+                        My Assignments
+                    </h1>
+
+                    <p>
+                        View your assignments, edit details and check student submissions.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/teacher/assignments/create"
+                    class="teacher-create-assignment-btn"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Create Assignment
+                </a>
+
+            </div>
+
+
+            <% if (assignments && assignments.length > 0) { %>
+
+                <div class="teacher-assignment-list">
+
+                    <% assignments.forEach(assignment => { %>
+
+                        <div class="teacher-assignment-card">
+
+
+                            <div class="teacher-assignment-icon">
+
+                                <i class="fa-solid fa-file-pen"></i>
+
+                            </div>
+
+
+                            <div class="teacher-assignment-info">
+
+                                <h2>
+                                    <%= assignment.title %>
+                                </h2>
+
+
+                                <p>
+
+                                    <i class="fa-solid fa-book"></i>
+
+                                    <%= assignment.course
+                                        ? assignment.course.courseName
+                                        : "Course"
+                                    %>
+
+                                </p>
+
+
+                                <p>
+
+                                    <i class="fa-solid fa-book-open"></i>
+
+                                    <%= assignment.course
+                                        ? assignment.course.subject
+                                        : "Subject"
+                                    %>
+
+                                </p>
+
+
+                                <p class="teacher-due-date">
+
+                                    <i class="fa-solid fa-calendar-days"></i>
+
+                                    Due:
+
+                                    <%= new Date(
+                                        assignment.dueDate
+                                    ).toLocaleDateString() %>
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="teacher-assignment-actions">
+
+
+                                <a
+                                    href="/teacher/assignments/<%= assignment._id %>/edit"
+                                    class="edit-assignment-btn"
+                                >
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                    Edit
+
+                                </a>
+
+
+                                <a
+                                    href="/teacher/assignments/<%= assignment._id %>/submissions"
+                                    class="view-submissions-btn"
+                                >
+
+                                    <i class="fa-solid fa-users"></i>
+
+                                    View Submissions
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+
+            <% } else { %>
+
+
+                <div class="teacher-no-assignment">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    <h2>
+                        No assignments created yet
+                    </h2>
+
+                    <p>
+                        Create an assignment for your students.
+                    </p>
+
+                    <a
+                        href="/teacher/assignments/create"
+                    >
+                        Create Assignment
+                    </a>
+
+                </div>
+
+
+            <% } %>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

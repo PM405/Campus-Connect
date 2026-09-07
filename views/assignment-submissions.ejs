@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Assignment Submissions | CampusConnect
+    </title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="submission-page">
+
+        <div class="submission-container">
+
+            <a
+                href="/teacher/assignments"
+                class="submission-back-btn"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Assignments
+            </a>
+
+
+            <div class="submission-header">
+
+                <span>
+                    STUDENT SUBMISSIONS
+                </span>
+
+                <h1>
+                    <%= assignment.title %>
+                </h1>
+
+                <p>
+                    <i class="fa-solid fa-book"></i>
+
+                    <%= assignment.course.courseName %>
+
+                    •
+
+                    <%= assignment.course.subject %>
+                </p>
+
+            </div>
+
+
+            <div class="submission-summary">
+
+                <div class="submission-summary-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        <%= assignment.submissions.length %>
+                    </strong>
+
+                    <span>
+                        Submission(s)
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <% if (
+                assignment.submissions &&
+                assignment.submissions.length > 0
+            ) { %>
+
+                <div class="submission-list">
+
+                    <% assignment.submissions.forEach(
+                        submission => {
+                    %>
+
+                        <div class="submission-card">
+
+                            <div class="student-submission-icon">
+
+                                <i class="fa-solid fa-user-graduate"></i>
+
+                            </div>
+
+
+                            <div class="submission-student">
+
+                                <h2>
+                                    <%= submission.student
+                                        ? submission.student.name
+                                        : "Student"
+                                    %>
+                                </h2>
+
+                                <p>
+
+                                    <i class="fa-solid fa-envelope"></i>
+
+                                    <%= submission.student
+                                        ? submission.student.email
+                                        : "Email not available"
+                                    %>
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="submission-file">
+
+                                <span>
+                                    <i class="fa-solid fa-file"></i>
+
+                                    <%= submission.fileName %>
+                                </span>
+
+                                <small>
+
+                                    Submitted:
+
+                                    <%= new Date(
+                                        submission.submittedAt
+                                    ).toLocaleString() %>
+
+                                </small>
+
+                            </div>
+
+
+                            <div class="submission-actions">
+
+                                <a
+                                    href="<%= submission.filePath %>"
+                                    target="_blank"
+                                    class="submission-view-btn"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                    View File
+                                </a>
+
+                                <a
+                                    href="<%= submission.filePath %>"
+                                    download
+                                    class="submission-download-btn"
+                                >
+                                    <i class="fa-solid fa-download"></i>
+                                    Download
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+                <div class="no-submissions">
+
+                    <i class="fa-solid fa-inbox"></i>
+
+                    <h2>
+                        No submissions yet
+                    </h2>
+
+                    <p>
+                        Students have not submitted this assignment yet.
+                    </p>
+
+                </div>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

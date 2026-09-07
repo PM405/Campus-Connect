@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Notices - CampusConnect</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<div class="notice-page">
+
+    <div class="notice-container">
+
+        <div class="notice-topbar">
+
+            <a
+                href="/student/dashboard"
+                class="back-btn"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+        </div>
+
+        <div class="notice-header">
+
+            <div class="notice-header-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+
+            <div>
+                <h1>Notices</h1>
+
+                <p>
+                    Important announcements from your teachers.
+                </p>
+            </div>
+
+        </div>
+
+        <% if (notices && notices.length > 0) { %>
+
+            <div class="notice-list">
+
+                <% notices.forEach(notice => { %>
+
+                    <div class="notice-card">
+
+                        <div class="notice-card-top">
+
+                            <div class="notice-icon">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+
+                            <span class="notice-badge">
+                                Notice
+                            </span>
+
+                        </div>
+
+                        <h2>
+                            <%= notice.title %>
+                        </h2>
+
+                        <p class="notice-description">
+                            <%= notice.description %>
+                        </p>
+
+                        <div class="notice-course">
+
+                            <i class="fa-solid fa-book"></i>
+
+                            <div>
+
+                                <small>Course</small>
+
+                                <strong>
+                                    <%= notice.course
+                                        ? notice.course.courseName
+                                        : "Unknown Course" %>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <div class="notice-footer">
+
+                            <span>
+                                <i class="fa-solid fa-user"></i>
+
+                                <%= notice.teacher
+                                    ? notice.teacher.name
+                                    : "Teacher" %>
+
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <%= new Date(
+                                    notice.createdAt
+                                ).toLocaleDateString(
+                                    "en-IN",
+                                    {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric"
+                                    }
+                                ) %>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-bell-slash"></i>
+                </div>
+
+                <h2>No notices available</h2>
+
+                <p>
+                    There are no notices for your enrolled courses.
+                </p>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+<style>
+
+.notice-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+    padding: 40px 20px;
+}
+
+.notice-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.notice-topbar {
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.notice-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+}
+
+.notice-header-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 14px;
+    font-size: 25px;
+}
+
+.notice-header h1 {
+    margin: 0 0 5px;
+}
+
+.notice-header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.notice-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.notice-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.notice-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.notice-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 12px;
+}
+
+.notice-badge {
+    background: #eef2ff;
+    color: #4f46e5;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.notice-card h2 {
+    margin: 0 0 10px;
+    color: #111827;
+    font-size: 20px;
+}
+
+.notice-description {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.notice-course {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 14px;
+    background: #f9fafb;
+    border-radius: 10px;
+}
+
+.notice-course > i {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 9px;
+}
+
+.notice-course div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.notice-course small {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+.notice-course strong {
+    color: #374151;
+    font-size: 13px;
+}
+
+.notice-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.notice-footer span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.notice-footer i {
+    color: #4f46e5;
+}
+
+.empty-state {
+    text-align: center;
+    background: white;
+    padding: 70px 25px;
+    border-radius: 18px;
+}
+
+.empty-icon {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 50%;
+    font-size: 30px;
+}
+
+.empty-state h2 {
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #6b7280;
+}
+
+@media (max-width: 700px) {
+
+    .notice-page {
+        padding: 25px 12px;
+    }
+
+    .notice-list {
+        grid-template-columns: 1fr;
+    }
+
+    .notice-header {
+        padding: 20px;
+    }
+
+    .notice-footer {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</body>
+</html>

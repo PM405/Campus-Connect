@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Study Material - CampusConnect</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="material-form-page">
+
+    <div class="material-form-container">
+
+        <a href="/teacher/materials" class="material-back-btn">
+            ← Back to Materials
+        </a>
+
+        <h1>Add Study Material</h1>
+
+        <p class="material-form-subtitle">
+            Share learning resources with students
+        </p>
+
+        <form action="/teacher/materials/create" method="POST">
+
+            <label>Select Course</label>
+
+            <select name="courseId" required>
+                <option value="">Select a course</option>
+
+                <% courses.forEach(course => { %>
+                    <option value="<%= course._id %>">
+                        <%= course.courseName %> - <%= course.subject %>
+                    </option>
+                <% }) %>
+
+            </select>
+
+            <label>Material Title</label>
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Example: Unit 1 Data Mining Notes"
+                required
+            >
+
+            <label>Description</label>
+
+            <textarea
+                name="description"
+                placeholder="Enter a short description of this material"
+                rows="5"
+                required
+            ></textarea>
+
+            <label>Material Link</label>
+
+            <input
+                type="url"
+                name="materialLink"
+                placeholder="https://example.com/material.pdf"
+                required
+            >
+
+            <button type="submit">
+                Add Material
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

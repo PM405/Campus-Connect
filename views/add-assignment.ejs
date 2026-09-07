@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Assignment | CampusConnect</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="register-container">
+        <h1>Add Assignment</h1>
+
+        <p class="register-subtitle">
+            Create a new assignment for students
+        </p>
+
+        <form action="/teacher/assignments/add" method="POST">
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Assignment title"
+                required
+            >
+
+            <input
+                type="text"
+                name="subject"
+                placeholder="Subject name"
+                required
+            >
+
+            <textarea
+                name="description"
+                placeholder="Assignment description"
+                rows="5"
+                required
+            ></textarea>
+
+            <label>Due Date</label>
+
+            <input
+                type="date"
+                name="dueDate"
+                required
+            >
+
+            <button type="submit">
+                Add Assignment
+            </button>
+
+        </form>
+
+        <p class="register-login">
+            <a href="/teacher/dashboard">← Back to Dashboard</a>
+        </p>
+    </div>
+
+</body>
+</html>

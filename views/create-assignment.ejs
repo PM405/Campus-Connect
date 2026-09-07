@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Assignment | CampusConnect</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="assignment-create-page">
+
+        <div class="assignment-create-card">
+
+            <div class="assignment-create-icon">
+                <i class="fa-solid fa-file-pen"></i>
+            </div>
+
+            <span class="assignment-create-label">
+                TEACHER PORTAL
+            </span>
+
+            <h1>
+                Create Assignment
+            </h1>
+
+            <p class="assignment-create-description">
+                Create an assignment for one of your courses.
+            </p>
+
+            <form action="/teacher/assignments/create" method="POST">
+
+                <div class="assignment-form-group">
+
+                    <label for="courseId">
+                        Select Course
+                    </label>
+
+                    <div class="assignment-input-box">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        <select id="courseId" name="courseId" required>
+
+                            <option value="">
+                                Select a course
+                            </option>
+
+                            <% if (courses && courses.length> 0) { %>
+
+                                <% courses.forEach(course=> { %>
+
+                                    <option value="<%= course._id %>">
+                                        <%= course.courseName %> - <%= course.subject %>
+                                    </option>
+
+                                    <% }) %>
+
+                                        <% } %>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="assignment-form-group">
+
+                    <label for="title">
+                        Assignment Title
+                    </label>
+
+                    <div class="assignment-input-box">
+
+                        <i class="fa-solid fa-heading"></i>
+
+                        <input type="text" id="title" name="title" placeholder="Enter assignment title" required>
+
+                    </div>
+
+                </div>
+
+                <div class="assignment-form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <div class="assignment-input-box assignment-textarea-box">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                        <textarea id="description" name="description" placeholder="Enter assignment description"
+                            rows="5" required></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="assignment-form-group">
+
+                    <label for="dueDate">
+                        Due Date
+                    </label>
+
+                    <div class="assignment-input-box">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        <input type="date" id="dueDate" name="dueDate" required>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="create-assignment-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    Create Assignment
+                </button>
+
+            </form>
+           
+
+            <a href="/teacher/dashboard" class="assignment-back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

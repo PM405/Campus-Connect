@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course Created | CampusConnect</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <div class="course-created-page">
+
+        <div class="course-created-card">
+
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <span class="teacher-label">
+                COURSE CREATED
+            </span>
+
+            <h1>Course Created Successfully!</h1>
+
+            <p class="created-description">
+                Share this course key with your students so they can join
+                your course.
+            </p>
+
+            <div class="created-course-info">
+
+                <div>
+                    <span>Course</span>
+                    <strong><%= course.courseName %></strong>
+                </div>
+
+                <div>
+                    <span>Subject</span>
+                    <strong><%= course.subject %></strong>
+                </div>
+
+            </div>
+
+            <div class="course-key-box">
+
+                <span>COURSE KEY</span>
+
+                <strong>
+                    <%= course.courseKey %>
+                </strong>
+
+                <p>
+                    Give this key to your students.
+                </p>
+
+            </div>
+
+            <a href="/teacher/dashboard" class="create-course-btn">
+                Go to Teacher Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

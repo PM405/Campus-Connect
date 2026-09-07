@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | CampusConnect</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <h1>Create Account</h1>
+
+        <p class="register-subtitle">
+            Join CampusConnect
+        </p>
+
+        <form action="/register" method="POST">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+            <select name="role" required>
+                <option value="">Select your role</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="register-login">
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+
+    </div>
+    <footer class="student-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <span>
+                CampusConnect
+            </span>
+
+        </div>
+
+        <p>
+            Student & Faculty Collaboration Portal
+        </p>
+
+        <p>
+            Developed & Designed by
+            <a
+                href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Prince Mishra
+            </a>
+        </p>
+
+        <p class="footer-copyright">
+            © 2026 CampusConnect. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

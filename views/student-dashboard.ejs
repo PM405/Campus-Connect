@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Student Dashboard | CampusConnect
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="navbar-container">
+
+            <a
+                href="/student/dashboard"
+                class="navbar-brand"
+            >
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                CampusConnect
+
+            </a>
+
+            <div class="navbar-right">
+
+                <span class="navbar-user">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <%= userName %>
+
+                </span>
+
+                <button
+                    type="button"
+                    class="join-course-btn"
+                    onclick="openJoinModal()"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Join Course
+
+                </button>
+
+                <a
+                    href="/logout"
+                    class="logout-btn"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <main class="dashboard-container">
+
+        <!-- Welcome Section -->
+
+        <section class="welcome-section">
+
+            <div class="welcome-content">
+
+                <span class="section-label">
+                    STUDENT DASHBOARD
+                </span>
+
+                <h1>
+
+                    Welcome,
+
+                    <span>
+                        <%= userName %>
+                    </span>
+
+                </h1>
+
+                <p>
+
+                    Manage your courses, assignments, study materials and
+                    academic activities from one place.
+
+                </p>
+
+            </div>
+
+            <div class="welcome-icon">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+            </div>
+
+        </section>
+
+
+        <!-- Pending Course Requests -->
+
+        <% if (
+            typeof pendingRequests !== "undefined" &&
+            pendingRequests.length > 0
+        ) { %>
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        JOIN REQUESTS
+                    </span>
+
+                    <h2>
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Pending Requests
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="pending-request-list">
+
+                <% pendingRequests.forEach(request => { %>
+
+                    <% if (request.course) { %>
+
+                    <div class="pending-request-card">
+
+                        <div class="pending-request-icon">
+
+                            <i class="fa-solid fa-hourglass-half"></i>
+
+                        </div>
+
+                        <div class="pending-request-content">
+
+                            <h3>
+                                <%= request.course.courseName %>
+                            </h3>
+
+                            <p>
+
+                                Subject:
+
+                                <strong>
+                                    <%= request.course.subject %>
+                                </strong>
+
+                            </p>
+
+                            <p>
+
+                                Course Key:
+
+                                <strong>
+                                    <%= request.course.courseKey %>
+                                </strong>
+
+                            </p>
+
+                            <span class="pending-status">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                Pending Teacher Approval
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <% } %>
+
+                <% }) %>
+
+            </div>
+
+        </section>
+
+        <% } %>
+
+
+        <!-- My Courses -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        MY COURSES
+                    </span>
+
+                </div>
+
+            </div>
+
+            <% if (courses && courses.length > 0) { %>
+
+                <div class="course-grid">
+
+                    <% courses.forEach(course => { %>
+
+                        <div class="course-card">
+
+                            <div class="course-card-top">
+
+                                <div class="course-icon">
+
+                                    <i class="fa-solid fa-book-open"></i>
+
+                                </div>
+
+                                <span class="course-status">
+                                    Active
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                <%= course.courseName %>
+                            </h3>
+
+                            <p>
+
+                                <i class="fa-solid fa-book"></i>
+
+                                <%= course.subject %>
+
+                            </p>
+
+                            <div class="course-teacher">
+
+                                <i class="fa-solid fa-user-tie"></i>
+
+                                <div>
+
+                                    <small>
+                                        Teacher
+                                    </small>
+
+                                    <strong>
+
+                                        <%= course.teacher
+                                            ? course.teacher.name
+                                            : "Teacher"
+                                        %>
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                            <div class="course-dates">
+
+                                <div>
+
+                                    <small>
+                                        Start Date
+                                    </small>
+
+                                    <span>
+
+                                        <%= new Date(
+                                            course.startDate
+                                        ).toLocaleDateString() %>
+
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <small>
+                                        End Date
+                                    </small>
+
+                                    <span>
+
+                                        <%= new Date(
+                                            course.endDate
+                                        ).toLocaleDateString() %>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <a
+                                href="/course/<%= course._id %>"
+                                class="open-course-btn"
+                            >
+
+                                Open Course
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <h3>
+                        No courses joined
+                    </h3>
+
+                    <p>
+
+                        Join a course using the course key provided by your
+                        teacher.
+
+                    </p>
+
+                </div>
+
+            <% } %>
+
+        </section>
+
+
+        <!-- Academic Activities -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ACADEMIC ACTIVITIES
+                    </span>
+
+                    <h2>
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                        Quick Access
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card-grid">
+
+                <!-- Assignments -->
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                    </div>
+
+                    <h3>
+                        Assignments
+                    </h3>
+
+                    <p>
+
+                        View and submit assignments from your enrolled
+                        courses.
+
+                    </p>
+
+                    <a href="#assignments">
+
+                        View Assignments
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Study Materials -->
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                    </div>
+
+                    <h3>
+                        Study Materials
+                    </h3>
+
+                    <p>
+
+                        Access notes, PDFs and other learning resources.
+
+                    </p>
+
+                    <a href="#materials">
+
+                        View Materials
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Quizzes -->
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-circle-question"></i>
+
+                    </div>
+
+                    <h3>
+                        Quizzes
+                    </h3>
+
+                    <p>
+
+                        Attempt quizzes shared by your teachers.
+
+                    </p>
+
+                    <a href="/student/quizzes">
+
+                        View Quizzes
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Notices -->
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                    </div>
+
+                    <h3>
+                        Notices
+                    </h3>
+
+                    <p>
+
+                        Stay updated with important course announcements.
+
+                    </p>
+
+                    <a href="/student/notices">
+
+                        View Notices
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Discussions -->
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                    </div>
+
+                    <h3>
+                        Discussions
+                    </h3>
+
+                    <p>
+
+                        Ask questions and discuss topics with classmates
+                        and teachers.
+
+                    </p>
+
+                    <a href="/student/discussions">
+
+                        Open Discussion
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Online Classes -->
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+                    <h3>
+                        Online Classes
+                    </h3>
+
+                    <p>
+
+                        Join online classes shared by your teachers.
+
+                    </p>
+
+                    <a href="/student/online-classes">
+
+                        Join Class
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Assignments -->
+
+        <section
+            class="dashboard-section"
+            id="assignments"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ASSIGNMENTS
+                    </span>
+
+                    <h2>
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                        Recent Assignments
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="assignment-list">
+
+                <% if (
+                    assignments &&
+                    assignments.length > 0
+                ) { %>
+
+                    <% assignments
+                        .slice(0, 5)
+                        .forEach(assignment => { %>
+
+                        <div class="assignment-item">
+
+                            <div class="assignment-item-icon">
+
+                                <i class="fa-solid fa-file-lines"></i>
+
+                            </div>
+
+                            <div class="assignment-item-content">
+
+                                <h3>
+                                    <%= assignment.title %>
+                                </h3>
+
+                                <p>
+                                    <%= assignment.description %>
+                                </p>
+
+                                <span>
+
+                                    <i class="fa-solid fa-book"></i>
+
+                                    <%= assignment.course
+                                        ? assignment.course.courseName
+                                        : "Course"
+                                    %>
+
+                                </span>
+
+                            </div>
+
+                            <div class="assignment-item-action">
+
+                                <div class="due-date">
+
+                                    <small>
+                                        Due Date
+                                    </small>
+
+                                    <strong>
+
+                                        <%= new Date(
+                                            assignment.dueDate
+                                        ).toLocaleDateString() %>
+
+                                    </strong>
+
+                                </div>
+
+                                <a
+                                    href="/student/assignments/<%= assignment._id %>"
+                                    class="view-btn"
+                                >
+                                    View
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="empty-assignment">
+
+                        <i class="fa-solid fa-file-circle-xmark"></i>
+
+                        <h3>
+                            No assignments yet
+                        </h3>
+
+                        <p>
+
+                            Your teachers have not created any assignments yet.
+
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </section>
+
+
+        <!-- Study Materials -->
+
+        <section
+            class="dashboard-section"
+            id="materials"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        STUDY RESOURCES
+                    </span>
+
+                    <h2>
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        Recent Study Materials
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="material-list">
+
+                <% if (
+                    typeof materials !== "undefined" &&
+                    materials.length > 0
+                ) { %>
+
+                    <% materials
+                        .slice(0, 5)
+                        .forEach(material => { %>
+
+                        <div class="material-item">
+
+                            <div class="material-item-icon">
+
+                                <i class="fa-solid fa-file-pdf"></i>
+
+                            </div>
+
+                            <div class="material-item-content">
+
+                                <h3>
+                                    <%= material.title %>
+                                </h3>
+
+                                <p>
+                                    <%= material.description %>
+                                </p>
+
+                                <span>
+
+                                    <i class="fa-solid fa-book"></i>
+
+                                    <%= material.course
+                                        ? material.course.courseName
+                                        : "Course"
+                                    %>
+
+                                </span>
+
+                            </div>
+
+                            <a
+                                href="<%= material.materialLink %>"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="material-view-btn"
+                            >
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                Open
+
+                            </a>
+
+                        </div>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="empty-material">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        <h3>
+                            No study materials yet
+                        </h3>
+
+                        <p>
+
+                            Your teachers have not uploaded any study material
+                            yet.
+
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </section>
+
+
+        <!-- Latest Notices -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ANNOUNCEMENTS
+                    </span>
+
+                    <h2>
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                        Latest Notices
+
+                    </h2>
+
+                </div>
+
+                <a
+                    href="/student/notices"
+                    class="view-all-notices-btn"
+                >
+
+                    View All Notices
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <div class="notice-list">
+
+                <% if (
+                    typeof notices !== "undefined" &&
+                    notices.length > 0
+                ) { %>
+
+                    <% notices
+                        .slice(0, 5)
+                        .forEach(notice => { %>
+
+                        <div class="notice-item">
+
+                            <div class="notice-item-icon">
+
+                                <i class="fa-solid fa-bullhorn"></i>
+
+                            </div>
+
+                            <div class="notice-item-content">
+
+                                <h3>
+                                    <%= notice.title %>
+                                </h3>
+
+                                <p>
+                                    <%= notice.description %>
+                                </p>
+
+                                <div class="notice-meta">
+
+                                    <span>
+
+                                        <i class="fa-solid fa-book"></i>
+
+                                        <%= notice.course
+                                            ? notice.course.courseName
+                                            : "Course"
+                                        %>
+
+                                    </span>
+
+                                    <span>
+
+                                        <i class="fa-solid fa-user-tie"></i>
+
+                                        <%= notice.teacher
+                                            ? notice.teacher.name
+                                            : "Teacher"
+                                        %>
+
+                                    </span>
+
+                                    <span>
+
+                                        <i class="fa-solid fa-calendar"></i>
+
+                                        <%= new Date(
+                                            notice.createdAt
+                                        ).toLocaleDateString() %>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="empty-notice">
+
+                        <i class="fa-solid fa-bell"></i>
+
+                        <h3>
+                            No notices yet
+                        </h3>
+
+                        <p>
+
+                            Important announcements from your teachers will
+                            appear here.
+
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Join Course Modal -->
+
+    <div
+        id="joinCourseModal"
+        class="modal-overlay"
+        onclick="closeJoinModal(event)"
+    >
+
+        <div
+            class="modal-box"
+            onclick="event.stopPropagation()"
+        >
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="section-label">
+                        COURSE ENROLLMENT
+                    </span>
+
+                    <h2>
+                        Join a Course
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    onclick="closeJoinModal()"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <form
+                action="/student/courses/join"
+                method="POST"
+            >
+
+                <div class="form-group">
+
+                    <label for="courseKey">
+                        Course Key
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-key"></i>
+
+                        <input
+                            type="text"
+                            id="courseKey"
+                            name="courseKey"
+                            placeholder="Enter course key"
+                            required
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                    <small>
+
+                        Enter the unique course key shared by your teacher.
+
+                    </small>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="modal-submit-btn"
+                >
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Join Course
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+
+                Developed & Designed by
+
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+
+            </p>
+
+            <p class="footer-copyright">
+
+                © 2026 CampusConnect. All rights reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        function openJoinModal() {
+
+            const modal =
+                document.getElementById(
+                    "joinCourseModal"
+                );
+
+            if (modal) {
+
+                modal.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        function closeJoinModal(event) {
+
+            if (
+                event &&
+                event.target !== event.currentTarget
+            ) {
+
+                return;
+
+            }
+
+            const modal =
+                document.getElementById(
+                    "joinCourseModal"
+                );
+
+            if (modal) {
+
+                modal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    closeJoinModal();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

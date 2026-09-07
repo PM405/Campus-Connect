@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Notice - CampusConnect</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<div class="notice-page">
+
+    <div class="notice-container">
+
+        <div class="notice-topbar">
+
+            <a href="/teacher/notices" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Notices
+            </a>
+
+        </div>
+
+        <div class="notice-header">
+
+            <div class="notice-header-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+
+            <div>
+                <h1>Create Notice</h1>
+                <p>Publish an important notice for your students.</p>
+            </div>
+
+        </div>
+
+        <div class="notice-form-card">
+
+            <form action="/teacher/notices/create" method="POST">
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Notice Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Enter notice title"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="courseId">
+                        Select Course
+                    </label>
+
+                    <select
+                        id="courseId"
+                        name="courseId"
+                        required
+                    >
+
+                        <option value="">
+                            Select a course
+                        </option>
+
+                        <% courses.forEach(course => { %>
+
+                            <option value="<%= course._id %>">
+
+                                <%= course.courseName %>
+                                -
+                                <%= course.subject %>
+
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Notice Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="7"
+                        placeholder="Write your notice here..."
+                        required
+                    ></textarea>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <a
+                        href="/teacher/notices"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="publish-btn"
+                    >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Publish Notice
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+.notice-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+    padding: 40px 20px;
+}
+
+.notice-container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.notice-topbar {
+    margin-bottom: 25px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.notice-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.notice-header-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 14px;
+    font-size: 25px;
+}
+
+.notice-header h1 {
+    margin: 0 0 5px;
+    color: #111827;
+}
+
+.notice-header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.notice-form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4f46e5;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.cancel-btn,
+.publish-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cancel-btn {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.publish-btn {
+    border: none;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+}
+
+.publish-btn:hover {
+    background: #4338ca;
+}
+
+@media (max-width: 600px) {
+
+    .notice-page {
+        padding: 25px 12px;
+    }
+
+    .notice-header {
+        padding: 20px;
+    }
+
+    .notice-form-card {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .publish-btn {
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
+
+</style>
+
+</body>
+</html>

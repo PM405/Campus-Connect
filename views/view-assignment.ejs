@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Assignment - CampusConnect</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="assignment-navigation">
+
+            <a href="/student/dashboard" class="dashboard-btn">
+                🏠 Student Dashboard
+            </a>
+
+            <a href="/student/assignments" class="back-assignment-btn">
+                ← Back to Assignments
+            </a>
+
+        </div>
+
+        <h1>
+            <%= assignment.title %>
+        </h1>
+
+        <p>
+            <strong>Course:</strong>
+            <%= assignment.course.courseName %>
+        </p>
+
+        <p>
+            <strong>Subject:</strong>
+            <%= assignment.course.subject %>
+        </p>
+
+        <p>
+            <strong>Description:</strong>
+        </p>
+
+        <p>
+            <%= assignment.description %>
+        </p>
+
+        <p>
+            <strong>Due Date:</strong>
+            <%= new Date(assignment.dueDate).toLocaleDateString() %>
+        </p>
+
+        <hr>
+
+        <h2>
+            Submit Assignment
+        </h2>
+
+        <form
+            action="/student/assignments/<%= assignment._id %>/submit"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <input
+                type="file"
+                name="file"
+                required
+            >
+
+            <button type="submit">
+                Submit Assignment
+            </button>
+
+        </form>
+
+        <% if (typeof submission !== "undefined" && submission) { %>
+
+            <hr>
+
+            <div class="submission-success">
+
+                <h2>
+                    Assignment Submitted ✅
+                </h2>
+
+                <p>
+                    <strong>File:</strong>
+                    <%= submission.fileName %>
+                </p>
+
+                <p>
+                    <strong>Submitted:</strong>
+                    <%= new Date(submission.submittedAt).toLocaleString() %>
+                </p>
+
+                <a
+                    href="<%= submission.filePath %>"
+                    target="_blank"
+                    class="view-file-btn"
+                >
+                    View Submitted File
+                </a>
+
+                <a
+                    href="<%= submission.filePath %>"
+                    download
+                    class="download-file-btn"
+                >
+                    Download Submitted File
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Online Class | CampusConnect
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="online-class-page">
+
+        <a
+            href="/student/online-classes"
+            class="back-link"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Online Classes
+
+        </a>
+
+
+        <div class="online-class-card">
+
+            <div class="online-class-top">
+
+                <div class="online-class-video-icon">
+
+                    <i class="fa-solid fa-video"></i>
+
+                </div>
+
+                <% if (onlineClass.status === "live") { %>
+
+                    <span class="live-badge">
+
+                        <span class="live-dot"></span>
+
+                        LIVE NOW
+
+                    </span>
+
+                <% } else { %>
+
+                    <span class="scheduled-badge">
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        SCHEDULED
+
+                    </span>
+
+                <% } %>
+
+            </div>
+
+
+            <div class="online-class-content">
+
+                <span class="online-class-label">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <%= onlineClass.course.courseName %>
+
+                </span>
+
+
+                <h1>
+
+                    <%= onlineClass.title %>
+
+                </h1>
+
+
+                <p class="online-class-subject">
+
+                    <%= onlineClass.course.subject %>
+
+                </p>
+
+
+                <div class="online-class-details">
+
+                    <div class="class-detail">
+
+                        <div class="class-detail-icon">
+
+                            <i class="fa-solid fa-user-tie"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>Teacher</span>
+
+                            <strong>
+
+                                <%= onlineClass.teacher.name %>
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="class-detail">
+
+                        <div class="class-detail-icon">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>Date & Time</span>
+
+                            <strong>
+
+                                <%= new Date(
+                                    onlineClass.scheduledAt
+                                ).toLocaleString() %>
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="class-detail">
+
+                        <div class="class-detail-icon">
+
+                            <i class="fa-solid fa-video"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>Platform</span>
+
+                            <strong>
+
+                                Jitsi Meet
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <% if (onlineClass.status === "live") { %>
+
+                    <a
+                        href="<%= onlineClass.meetingLink %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="join-class-btn"
+                    >
+
+                        <i class="fa-solid fa-video"></i>
+
+                        Join Live Class
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                <% } else { %>
+
+                    <div class="waiting-message">
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        <div>
+
+                            <strong>
+                                Class has not started yet
+                            </strong>
+
+                            <p>
+                                Please wait for the teacher to
+                                start the online class.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+                Developed & Designed by
+
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+
+            </p>
+
+            <p class="footer-copyright">
+
+                © 2026 CampusConnect. All rights reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

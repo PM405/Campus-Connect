@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Discussions | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="nav-brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            CampusConnect
+        </div>
+
+        <div class="nav-links">
+            <a href="/student/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/student/discussions">
+                Discussions
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+        </div>
+
+    </nav>
+
+
+    <main class="discussions-page">
+
+        <div class="discussion-header">
+
+            <div>
+                <span class="section-label">
+                    STUDENT COMMUNITY
+                </span>
+
+                <h1>
+                    <i class="fa-solid fa-comments"></i>
+                    Discussions
+                </h1>
+
+                <p>
+                    Ask questions and discuss
+                    course topics with your classmates.
+                </p>
+            </div>
+
+            <a
+                href="/student/discussions/create"
+                class="primary-btn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Start Discussion
+            </a>
+
+        </div>
+
+
+        <% if (discussions.length > 0) { %>
+
+            <div class="discussion-list">
+
+                <% discussions.forEach(discussion => { %>
+
+                    <div class="discussion-card">
+
+                        <div class="discussion-icon">
+                            <i class="fa-solid fa-message"></i>
+                        </div>
+
+                        <div class="discussion-content">
+
+                            <div class="discussion-course">
+                                <i class="fa-solid fa-book"></i>
+
+                                <%= discussion.course
+                                    ? discussion.course.courseName
+                                    : "Course" %>
+                            </div>
+
+                            <h2>
+                                <%= discussion.title %>
+                            </h2>
+
+                            <p>
+                                <%= discussion.description %>
+                            </p>
+
+                            <div class="discussion-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-user"></i>
+
+                                    <%= discussion.student
+                                        ? discussion.student.name
+                                        : "Student" %>
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-reply"></i>
+
+                                    <%= discussion.replies.length %>
+                                    Replies
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-calendar"></i>
+
+                                    <%= new Date(
+                                        discussion.createdAt
+                                    ).toLocaleDateString() %>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="/student/discussions/<%= discussion._id %>"
+                            class="discussion-view-btn"
+                        >
+                            View
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="empty-discussions">
+
+                <i class="fa-solid fa-comments"></i>
+
+                <h2>
+                    No Discussions Yet
+                </h2>
+
+                <p>
+                    Start a discussion and ask
+                    your course-related questions.
+                </p>
+
+                <a
+                    href="/student/discussions/create"
+                    class="primary-btn"
+                >
+                    Start First Discussion
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>CampusConnect</span>
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+                Developed & Designed by
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+            </p>
+
+            <p class="footer-copyright">
+                © 2026 CampusConnect. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

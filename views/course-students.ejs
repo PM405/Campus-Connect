@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course Students | CampusConnect</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="course-students-page">
+
+        <div class="course-students-container">
+
+            <div class="course-students-header">
+
+                <div>
+                    <span class="course-students-label">
+                        TEACHER PORTAL
+                    </span>
+
+                    <h1>
+                        <i class="fa-solid fa-users"></i>
+                        Course Students
+                    </h1>
+
+                    <p>
+                        View and manage students enrolled in this course.
+                    </p>
+                </div>
+
+                <a
+                    href="/teacher/dashboard"
+                    class="course-students-back-btn"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Dashboard
+                </a>
+
+            </div>
+
+
+            <div class="course-info-card">
+
+                <div class="course-info-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div class="course-info-content">
+
+                    <h2>
+                        <%= course.courseName %>
+                    </h2>
+
+                    <p>
+                        <strong>Subject:</strong>
+                        <%= course.subject %>
+                    </p>
+
+                    <span class="course-key-badge">
+                        Course Key: <%= course.courseKey %>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="students-section">
+
+                <div class="students-section-header">
+
+                    <div>
+                        <h2>
+                            Enrolled Students
+                        </h2>
+
+                        <p>
+                            <%= course.students.length %> student(s) joined this course.
+                        </p>
+                    </div>
+
+                    <div class="student-count">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <%= course.students.length %>
+                    </div>
+
+                </div>
+
+
+                <% if (course.students.length > 0) { %>
+
+                    <div class="students-list">
+
+                        <% course.students.forEach((student, index) => { %>
+
+                            <div class="student-card">
+
+                                <div class="student-number">
+                                    <%= index + 1 %>
+                                </div>
+
+                                <div class="student-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div class="student-details">
+
+                                    <h3>
+                                        <%= student.name %>
+                                    </h3>
+
+                                    <p>
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <%= student.email %>
+                                    </p>
+
+                                </div>
+
+                                <form
+                                    action="/teacher/courses/<%= course._id %>/students/<%= student._id %>/remove"
+                                    method="POST"
+                                    onsubmit="return confirm('Are you sure you want to remove this student from the course?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="remove-student-btn"
+                                    >
+                                        <i class="fa-solid fa-user-minus"></i>
+                                        Remove
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="no-students">
+
+                        <div class="no-students-icon">
+                            <i class="fa-solid fa-user-group"></i>
+                        </div>
+
+                        <h3>
+                            No Students Yet
+                        </h3>
+
+                        <p>
+                            No student has joined this course yet.
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

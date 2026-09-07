@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Teacher Dashboard | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body class="teacher-dashboard-page">
+
+    <!-- Teacher Navbar -->
+    <nav class="teacher-navbar">
+
+        <div class="teacher-logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <span>
+                CampusConnect
+            </span>
+
+        </div>
+
+        <div class="teacher-nav-right">
+
+            <div class="teacher-profile">
+
+                <div class="teacher-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="teacher-info">
+
+                    <strong>
+                        <%= userName %>
+                    </strong>
+
+                    <span>
+                        Teacher
+                    </span>
+
+                </div>
+
+            </div>
+
+            <a
+                href="/logout"
+                class="teacher-logout"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="teacher-main">
+
+        <!-- Welcome Section -->
+        <section class="teacher-welcome">
+
+            <div>
+
+                <span class="teacher-label">
+                    TEACHER PORTAL
+                </span>
+
+                <h1>
+                    Welcome,
+                    <span>
+                        <%= userName %>
+                    </span>
+                    Sir
+                </h1>
+
+                <p>
+                    Manage your courses, students and academic activities
+                    from one place.
+                </p>
+
+            </div>
+
+            <a
+                href="/teacher/courses/new"
+                class="create-course-btn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Create Course
+            </a>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="teacher-stats">
+
+            <div class="teacher-stat-card">
+
+                <div class="teacher-stat-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        My Courses
+                    </span>
+
+                    <strong>
+                        <%= courses ? courses.length : 0 %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <div class="teacher-stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Students
+                    </span>
+
+                    <strong>
+                        <%= totalStudents || 0 %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <div class="teacher-stat-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Assignments
+                    </span>
+
+                    <strong>
+                        <%= typeof assignmentCount !== "undefined"
+                            ? assignmentCount
+                            : 0
+                        %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <div class="teacher-stat-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Notices
+                    </span>
+
+                    <strong>
+                        <%= typeof noticeCount !== "undefined"
+                            ? noticeCount
+                            : 0
+                        %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <div class="teacher-stat-icon">
+                    <i class="fa-solid fa-user-clock"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Join Requests
+                    </span>
+
+                    <strong>
+                        <%= typeof joinRequestCount !== "undefined"
+                            ? joinRequestCount
+                            : 0
+                        %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Course Management -->
+        <section class="teacher-section">
+
+            <div class="teacher-section-header">
+
+                <div>
+
+                    <span class="section-small-title">
+                        COURSE MANAGEMENT
+                    </span>
+
+                    <h2>
+                        My Courses
+                    </h2>
+
+                    <p>
+                        Manage your courses and connected students.
+                    </p>
+
+                </div>
+
+                <a
+                    href="/teacher/courses/new"
+                    class="small-create-btn"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    New Course
+                </a>
+
+            </div>
+
+
+            <% if (courses && courses.length > 0) { %>
+
+                <div class="teacher-course-grid">
+
+                    <% courses.forEach(course => { %>
+
+                        <div class="teacher-course-card">
+
+                            <div class="teacher-course-card-top">
+
+                                <div class="teacher-course-icon">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        <%= course.courseName %>
+                                    </h3>
+
+                                    <p>
+                                        <%= course.subject %>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="teacher-course-key">
+
+                                <span>
+                                    Course Key
+                                </span>
+
+                                <strong>
+                                    <%= course.courseKey %>
+                                </strong>
+
+                            </div>
+
+
+                            <div class="teacher-course-students">
+
+                                <i class="fa-solid fa-users"></i>
+
+                                <span>
+                                    <%= course.students.length %>
+                                    Students
+                                </span>
+
+                            </div>
+
+
+                            <div class="teacher-course-dates">
+
+                                <div>
+
+                                    <i class="fa-solid fa-calendar-plus"></i>
+
+                                    <span>
+                                        Start:
+                                    </span>
+
+                                    <strong>
+                                        <%= new Date(
+                                            course.startDate
+                                        ).toLocaleDateString() %>
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                                    <span>
+                                        End:
+                                    </span>
+
+                                    <strong>
+                                        <%= new Date(
+                                            course.endDate
+                                        ).toLocaleDateString() %>
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="course-card-actions">
+
+                                <a
+                                    href="/course/<%= course._id %>"
+                                    class="manage-course-btn"
+                                >
+                                    <i class="fa-solid fa-folder-open"></i>
+
+                                    <p>
+                                        Manage Course
+                                    </p>
+                                </a>
+
+
+                                <a
+                                    href="/teacher/assignments"
+                                >
+                                    <i class="fa-solid fa-file-lines"></i>
+                                    Assignments
+                                </a>
+
+
+                                <a
+                                    href="/teacher/materials"
+                                >
+                                    <i class="fa-solid fa-book"></i>
+                                    Materials
+                                </a>
+
+
+                                <a
+                                    href="/teacher/courses/<%= course._id %>/students"
+                                >
+                                    <i class="fa-solid fa-users"></i>
+                                    Students
+                                </a>
+
+                            </div>
+
+
+                            <form
+                                action="/teacher/courses/<%= course._id %>/delete"
+                                method="POST"
+                                class="delete-course-form"
+                                onsubmit="return confirm('Are you sure you want to delete this course? All assignments and submissions of this course will also be deleted.');"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="delete-course-btn"
+                                >
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete Course
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+                <div class="course-empty">
+
+                    <div class="course-empty-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <h3>
+                        No courses created yet
+                    </h3>
+
+                    <p>
+                        Create your first course and share its unique key
+                        with your students.
+                    </p>
+
+                    <a
+                        href="/teacher/courses/new"
+                        class="empty-create-btn"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Create Your First Course
+                    </a>
+
+                </div>
+
+            <% } %>
+
+        </section>
+
+
+        <!-- Quick Actions -->
+        <section class="teacher-section">
+
+            <div class="teacher-section-header">
+
+                <div>
+
+                    <span class="section-small-title">
+                        ACADEMIC MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Access your teaching tools quickly.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-action-grid">
+
+                <!-- Assignments -->
+                <div class="teacher-action-card">
+
+                    <div class="action-icon assignment-icon">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Assignments
+                        </h3>
+
+                        <p>
+                            Create and manage assignments for your courses.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/assignments"
+                        class="action-link"
+                    >
+                        Manage
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- Study Materials -->
+                <div class="teacher-action-card">
+
+                    <div class="action-icon material-icon">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Study Materials
+                        </h3>
+
+                        <p>
+                            Share notes and learning resources with students.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/materials"
+                        class="action-link"
+                    >
+                        Manage
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- Quizzes -->
+                <div class="teacher-action-card">
+
+                    <div class="action-icon quiz-icon">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Quizzes
+                        </h3>
+
+                        <p>
+                            Create quizzes and check student performance.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/quizzes"
+                        class="action-link"
+                    >
+                        Manage
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- Notices -->
+                <div class="teacher-action-card">
+
+                    <div class="action-icon notice-icon">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Notices
+                        </h3>
+
+                        <p>
+                            Send important announcements to your students.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/notices"
+                        class="action-link"
+                    >
+                        Manage
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- Course Join Requests -->
+                <div class="teacher-action-card join-request-card">
+
+                    <div class="action-icon request-icon">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+
+                            Course Join Requests
+
+                            <% if (
+                                typeof joinRequestCount !== "undefined" &&
+                                joinRequestCount > 0
+                            ) { %>
+
+                                <span class="request-count-badge">
+                                    <%= joinRequestCount %>
+                                </span>
+
+                            <% } %>
+
+                        </h3>
+
+                        <p>
+                            Review and approve students who want
+                            to join your courses.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/course-requests"
+                        class="action-link"
+                    >
+                        Review
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- Messages -->
+                <div class="teacher-action-card">
+
+                    <div class="action-icon message-icon">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Messages
+                        </h3>
+
+                        <p>
+                            Communicate with students in your courses.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/messages"
+                        class="action-link"
+                    >
+                        Open
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- Online Classes -->
+                <div class="teacher-action-card">
+
+                    <div class="action-icon class-icon">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Online Classes
+                        </h3>
+
+                        <p>
+                            Schedule and manage online classes.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/teacher/online-classes"
+                        class="action-link"
+                    >
+                        Manage
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Information Section -->
+        <section class="teacher-info-section">
+
+            <div class="teacher-info-card">
+
+                <div class="info-card-icon">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        How Course Keys Work
+                    </h3>
+
+                    <p>
+                        Create a course and CampusConnect will generate
+                        a unique course key. Share the key with your
+                        students so they can request to join your course.
+                        You can approve or reject each request.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-info-card">
+
+                <div class="info-card-icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Approve Student Requests
+                    </h3>
+
+                    <p>
+                        Students are not added directly to your course.
+                        Their join request must be reviewed and approved
+                        by you before they become a course member.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="teacher-info-card">
+
+                <div class="info-card-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        One Course, Multiple Students
+                    </h3>
+
+                    <p>
+                        All approved students who join your course can
+                        receive assignments, materials, quizzes,
+                        notices and other course activities.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+                Developed & Designed by
+
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+            </p>
+
+            <p class="footer-copyright">
+                © 2026 CampusConnect. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

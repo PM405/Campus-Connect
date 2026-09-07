@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Quiz Result - CampusConnect
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="result-page">
+
+
+    <div class="result-card">
+
+
+        <div class="result-icon">
+
+            <i class="fa-solid fa-trophy"></i>
+
+        </div>
+
+
+        <span class="result-label">
+
+            QUIZ COMPLETED
+
+        </span>
+
+
+        <h1>
+
+            <%= quiz.title %>
+
+        </h1>
+
+
+        <p class="result-message">
+
+            Your quiz has been submitted successfully.
+
+        </p>
+
+
+        <div class="score-circle">
+
+            <strong>
+
+                <%= score %>
+
+            </strong>
+
+            <span>
+
+                / <%= totalMarks %>
+
+            </span>
+
+        </div>
+
+
+        <h2>
+
+            <%= percentage %>%
+
+        </h2>
+
+
+        <p class="score-text">
+
+            Your Score
+
+        </p>
+
+
+        <div class="result-details">
+
+
+            <div>
+
+                <span>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Score
+
+                </span>
+
+                <strong>
+
+                    <%= score %> / <%= totalMarks %>
+
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+
+                    <i class="fa-solid fa-percent"></i>
+
+                    Percentage
+
+                </span>
+
+                <strong>
+
+                    <%= percentage %>%
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="result-actions">
+
+
+            <a
+                href="/course/<%= course._id %>#quizzes"
+                class="result-btn primary"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Course
+
+            </a>
+
+
+            <a
+                href="/student/dashboard"
+                class="result-btn secondary"
+            >
+
+                Dashboard
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<style>
+
+.result-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 15px;
+
+    background: #f5f7fb;
+
+}
+
+
+.result-card {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    text-align: center;
+
+    background: white;
+
+    padding: 40px 30px;
+
+    border-radius: 22px;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+
+}
+
+
+.result-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fef3c7;
+
+    color: #d97706;
+
+    font-size: 32px;
+
+}
+
+
+.result-label {
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.result-card h1 {
+
+    color: #111827;
+
+    margin: 8px 0;
+
+}
+
+
+.result-message {
+
+    color: #6b7280;
+
+    margin-bottom: 25px;
+
+}
+
+
+.score-circle {
+
+    width: 160px;
+
+    height: 160px;
+
+    margin: 25px auto 15px;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+
+    border: 8px solid #4f46e5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.score-circle strong {
+
+    font-size: 42px;
+
+    color: #4f46e5;
+
+}
+
+
+.score-circle span {
+
+    color: #6b7280;
+
+    font-size: 18px;
+
+    margin-top: 18px;
+
+}
+
+
+.result-card h2 {
+
+    color: #111827;
+
+    font-size: 30px;
+
+    margin: 8px 0;
+
+}
+
+
+.score-text {
+
+    color: #6b7280;
+
+    margin-bottom: 25px;
+
+}
+
+
+.result-details {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.result-details div {
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+}
+
+
+.result-details span {
+
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.result-details i {
+
+    color: #4f46e5;
+
+}
+
+
+.result-details strong {
+
+    color: #111827;
+
+}
+
+
+.result-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.result-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+
+.result-btn.primary {
+
+    background: #4f46e5;
+
+    color: white;
+
+}
+
+
+.result-btn.primary:hover {
+
+    background: #4338ca;
+
+}
+
+
+.result-btn.secondary {
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .result-card {
+
+        padding: 30px 18px;
+
+    }
+
+
+    .result-details {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+</style>
+
+
+</body>
+
+</html>

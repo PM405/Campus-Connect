@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Quizzes - CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<div class="quiz-page">
+
+    <div class="quiz-container">
+
+        <!-- Top Navigation -->
+
+        <div class="quiz-topbar">
+
+            <a
+                href="/teacher/dashboard"
+                class="back-btn"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+            <a
+                href="/teacher/quizzes/create"
+                class="create-btn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Create Quiz
+            </a>
+
+        </div>
+
+
+        <!-- Page Header -->
+
+        <div class="quiz-header">
+
+            <div class="quiz-header-icon">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+
+            <div>
+
+                <h1>My Quizzes</h1>
+
+                <p>
+                    Create and manage quizzes for your courses.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <% if (quizzes && quizzes.length > 0) { %>
+
+
+            <!-- Quiz Grid -->
+
+            <div class="quiz-grid">
+
+                <% quizzes.forEach(quiz => { %>
+
+                    <div class="quiz-card">
+
+
+                        <!-- Card Top -->
+
+                        <div class="quiz-card-top">
+
+                            <div class="quiz-icon">
+
+                                <i class="fa-solid fa-brain"></i>
+
+                            </div>
+
+                            <span class="quiz-badge">
+                                Quiz
+                            </span>
+
+                        </div>
+
+
+                        <!-- Quiz Title -->
+
+                        <h2>
+                            <%= quiz.title %>
+                        </h2>
+
+
+                        <!-- Description -->
+
+                        <p class="quiz-description">
+
+                            <%= quiz.description %>
+
+                        </p>
+
+
+                        <!-- Quiz Information -->
+
+                        <div class="quiz-info">
+
+
+                            <!-- Subject -->
+
+                            <div class="quiz-info-item">
+
+                                <i class="fa-solid fa-book"></i>
+
+                                <div>
+
+                                    <small>
+                                        Subject
+                                    </small>
+
+                                    <strong>
+
+                                        <%= quiz.course
+                                            ? quiz.course.subject
+                                            : "Unknown Subject" %>
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Course -->
+
+                            <div class="quiz-info-item">
+
+                                <i class="fa-solid fa-graduation-cap"></i>
+
+                                <div>
+
+                                    <small>
+                                        Course
+                                    </small>
+
+                                    <strong>
+
+                                        <%= quiz.course
+                                            ? quiz.course.courseName
+                                            : "Unknown Course" %>
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Questions -->
+
+                            <div class="quiz-info-item">
+
+                                <i class="fa-solid fa-list-check"></i>
+
+                                <div>
+
+                                    <small>
+                                        Questions
+                                    </small>
+
+                                    <strong>
+
+                                        <%= quiz.questions
+                                            ? quiz.questions.length
+                                            : 0 %>
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Total Marks -->
+
+                            <div class="quiz-info-item">
+
+                                <i class="fa-solid fa-star"></i>
+
+                                <div>
+
+                                    <small>
+                                        Total Marks
+                                    </small>
+
+                                    <strong>
+
+                                        <%= quiz.questions
+                                            ? quiz.questions.reduce(
+                                                (total, question) =>
+                                                    total +
+                                                    Number(
+                                                        question.marks || 0
+                                                    ),
+                                                0
+                                            )
+                                            : 0 %>
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- Created Date -->
+
+                        <div class="quiz-date">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            Created:
+
+                            <%= quiz.createdAt
+                                ? new Date(
+                                    quiz.createdAt
+                                ).toLocaleDateString(
+                                    "en-IN",
+                                    {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric"
+                                    }
+                                )
+                                : "N/A" %>
+
+                        </div>
+
+
+                        <!-- Manage Button -->
+
+                        <a
+                            href="/teacher/quizzes/<%= quiz._id %>"
+                            class="manage-btn"
+                        >
+
+                            <span>
+                                <i class="fa-solid fa-gear"></i>
+                                Manage Quiz
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+
+        <% } else { %>
+
+
+            <!-- Empty State -->
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-clipboard-question"></i>
+
+                </div>
+
+                <h2>
+                    No quizzes created yet
+                </h2>
+
+                <p>
+                    Create your first quiz and add questions
+                    for your students.
+                </p>
+
+                <a
+                    href="/teacher/quizzes/create"
+                    class="empty-create-btn"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Create Your First Quiz
+
+                </a>
+
+            </div>
+
+
+        <% } %>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

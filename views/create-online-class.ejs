@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Online Class | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="online-class-form-page">
+
+        <a
+            href="/teacher/online-classes"
+            class="back-link"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Online Classes
+
+        </a>
+
+
+        <div class="online-class-form-card">
+
+            <div class="online-class-form-header">
+
+                <div class="online-class-icon">
+
+                    <i class="fa-solid fa-video"></i>
+
+                </div>
+
+                <span class="section-label">
+                    ONLINE CLASS
+                </span>
+
+                <h1>
+                    Create Online Class
+                </h1>
+
+                <p>
+                    Schedule a live online class for your students.
+                </p>
+
+            </div>
+
+
+            <form
+                action="/teacher/online-classes/create"
+                method="POST"
+                class="online-class-form"
+            >
+
+                <div class="form-group">
+
+                    <label for="title">
+
+                        <i class="fa-solid fa-heading"></i>
+
+                        Class Title
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. Data Mining - Unit 3"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="courseId">
+
+                        <i class="fa-solid fa-book"></i>
+
+                        Select Course
+
+                    </label>
+
+                    <select
+                        id="courseId"
+                        name="courseId"
+                        required
+                    >
+
+                        <option value="">
+                            Select a course
+                        </option>
+
+                        <% courses.forEach(course => { %>
+
+                            <option
+                                value="<%= course._id %>"
+                            >
+
+                                <%= course.courseName %>
+                                -
+                                <%= course.subject %>
+
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="scheduledAt">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        Date & Time
+
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        id="scheduledAt"
+                        name="scheduledAt"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="online-class-info">
+
+                    <div class="info-icon">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Jitsi Meet
+                        </h3>
+
+                        <p>
+                            A unique Jitsi Meet link will be
+                            automatically created for this class.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn online-class-submit"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Create Online Class
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+                Developed & Designed by
+
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+
+            </p>
+
+            <p class="footer-copyright">
+                © 2026 CampusConnect. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
