@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Quizzes | CampusConnect
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <main class="student-quizzes-page">
+
+
+        <div class="student-quizzes-header">
+
+
+            <div>
+
+                <a
+                    href="/student/dashboard"
+                    class="back-link"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+
+
+                <span class="quiz-section-label">
+                    ASSESSMENT & LEARNING
+                </span>
+
+
+                <h1>
+                    Quizzes
+                </h1>
+
+
+                <p>
+                    Attempt quizzes created by your teachers
+                    and test your knowledge.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <section class="student-quiz-section">
+
+
+            <div class="student-quiz-section-heading">
+
+                <div>
+
+                    <span>
+                        YOUR QUIZZES
+                    </span>
+
+                    <h2>
+                        Available Quizzes
+                    </h2>
+
+                </div>
+
+
+                <% if (quizzes && quizzes.length > 0) { %>
+
+                    <div class="quiz-count-badge">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                        <%= quizzes.length %>
+                        <%= quizzes.length === 1
+                            ? "Quiz"
+                            : "Quizzes"
+                        %>
+
+                    </div>
+
+                <% } %>
+
+
+            </div>
+
+
+            <% if (quizzes && quizzes.length > 0) { %>
+
+
+                <div class="student-quiz-list">
+
+
+                    <% quizzes.forEach(quiz => { %>
+
+
+                        <article class="student-quiz-card">
+
+
+                            <div class="student-quiz-card-top">
+
+
+                                <div class="student-quiz-icon">
+
+                                    <i class="fa-solid fa-clipboard-question"></i>
+
+                                </div>
+
+
+                                <div class="student-quiz-main-info">
+
+
+                                    <span class="student-quiz-course">
+
+                                        <i class="fa-solid fa-book"></i>
+
+                                        <%= quiz.course
+                                            ? quiz.course.courseName
+                                            : "Course"
+                                        %>
+
+                                    </span>
+
+
+                                    <h3>
+                                        <%= quiz.title %>
+                                    </h3>
+
+
+                                    <% if (
+                                        quiz.course &&
+                                        quiz.course.subject
+                                    ) { %>
+
+                                        <p class="student-quiz-subject">
+
+                                            <i class="fa-solid fa-book-open"></i>
+
+                                            <%= quiz.course.subject %>
+
+                                        </p>
+
+                                    <% } %>
+
+
+                                </div>
+
+
+                                <span class="quiz-available-badge">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Available
+
+                                </span>
+
+
+                            </div>
+
+
+                            <div class="student-quiz-description">
+
+                                <p>
+                                    <%= quiz.description %>
+                                </p>
+
+                            </div>
+
+
+                            <div class="student-quiz-details">
+
+
+                                <div class="quiz-detail-item">
+
+                                    <div class="quiz-detail-icon">
+
+                                        <i class="fa-solid fa-list-ol"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Questions
+                                        </span>
+
+                                        <strong>
+                                            <%= quiz.questions
+                                                ? quiz.questions.length
+                                                : 0
+                                            %>
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="quiz-detail-item">
+
+                                    <div class="quiz-detail-icon">
+
+                                        <i class="fa-solid fa-award"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Total Marks
+                                        </span>
+
+                                        <strong>
+
+                                            <%
+                                                let totalMarks = 0;
+
+                                                if (quiz.questions) {
+                                                    quiz.questions.forEach(question => {
+                                                        totalMarks += Number(
+                                                            question.marks
+                                                        ) || 0;
+                                                    });
+                                                }
+                                            %>
+
+                                            <%= totalMarks %>
+
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="quiz-detail-item">
+
+                                    <div class="quiz-detail-icon">
+
+                                        <i class="fa-regular fa-calendar"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Created
+                                        </span>
+
+                                        <strong>
+
+                                            <%= new Date(
+                                                quiz.createdAt
+                                            ).toLocaleDateString() %>
+
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="student-quiz-card-footer">
+
+
+                                <div class="quiz-ready-message">
+
+                                    <i class="fa-solid fa-circle-info"></i>
+
+                                    <span>
+                                        Read all questions carefully
+                                        before submitting.
+                                    </span>
+
+                                </div>
+
+
+                                <a
+                                    href="/student/quizzes/<%= quiz._id %>"
+                                    class="attempt-quiz-btn"
+                                >
+
+                                    <i class="fa-solid fa-play"></i>
+
+                                    Attempt Quiz
+
+                                </a>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    <% }) %>
+
+
+                </div>
+
+
+            <% } else { %>
+
+
+                <div class="no-student-quizzes">
+
+
+                    <div class="no-quiz-icon">
+
+                        <i class="fa-solid fa-clipboard-question"></i>
+
+                    </div>
+
+
+                    <span class="no-quiz-label">
+                        QUIZ CENTER
+                    </span>
+
+
+                    <h2>
+                        Quiz is not available currently
+                    </h2>
+
+
+                    <p>
+                        Your teacher has not added any quiz
+                        for your enrolled courses yet.
+                        Please check again later.
+                    </p>
+
+
+                    <a
+                        href="/student/dashboard"
+                        class="quiz-dashboard-btn"
+                    >
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Back to Dashboard
+
+                    </a>
+
+
+                </div>
+
+
+            <% } %>
+
+
+        </section>
+
+
+        <section class="student-quiz-info-section">
+
+
+            <div class="student-quiz-info-card">
+
+
+                <div class="student-quiz-info-icon">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        How Quizzes Work
+                    </h3>
+
+                    <p>
+                        Your teacher creates quizzes for
+                        enrolled courses. Available quizzes
+                        appear here automatically.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="student-quiz-info-card">
+
+
+                <div class="student-quiz-info-icon">
+
+                    <i class="fa-solid fa-check-double"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Submit Your Answers
+                    </h3>
+
+                    <p>
+                        Select the best answer for each
+                        question and submit the quiz to
+                        view your result.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <footer class="student-footer">
+
+        <div class="footer-content">
+
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+
+            <p>
+
+                Developed & Designed by
+
+                <a
+                    href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Prince Mishra
+                </a>
+
+            </p>
+
+
+            <p class="footer-copyright">
+
+                © 2026 CampusConnect.
+                All rights reserved.
+
+            </p>
+
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

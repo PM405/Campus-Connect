@@ -315,4 +315,51 @@ router.post(
     }
 );
 
+router.get(
+    "/student/quizzes",
+    requireStudent,
+    async (req, res) => {
+        try {
+            const courses = await Course.find({
+                students: req.session.userId
+            });
+
+            const courseIds = courses.map(
+                course => course._id
+            );
+
+            const quizzes = await Quiz.find({
+                course: {
+                    $in: courseIds
+                }
+            })
+                .populate(
+                    "course",
+                    "courseName subject"
+                )
+                .sort({
+                    createdAt: -1
+                });
+
+            res.render(
+                "student-quizzes",
+                {
+                    quizzes,
+                    userName:
+                        req.session.userName
+                }
+            );
+        } catch (err) {
+            console.log(
+                "Student quizzes error:",
+                err.message
+            );
+
+            res.send(
+                "Unable to load quizzes."
+            );
+        }
+    }
+);
+
 module.exports = router;
