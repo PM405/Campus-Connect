@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,71 +19,72 @@
         <p class="register-subtitle">
             Login to CampusConnect
         </p>
+        <% if (resetSuccess) { %>
 
-        <form action="/login" method="POST">
+            <div class="success-message">
+                Password reset successfully.
+                You can now login with your new password.
+            </div>
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                required
-            >
+            <% } %>
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                required
-            >
+                <form action="/login" method="POST">
 
-            <button type="submit">
-                Login
-            </button>
+                    <input type="email" name="email" placeholder="Enter your email" required>
 
-        </form>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                    <div class="forgot-password">
+                        <a href="/forgot-password">
+                            Forgot Password?
+                        </a>
+                    </div>
 
-        <p class="register-login">
-            Don't have an account?
-            <a href="/register">Create Account</a>
-        </p>
+                    <button type="submit">
+                        Login
+                    </button>
+
+                </form>
+
+                <p class="register-login">
+                    Don't have an account?
+                    <a href="/register">Create Account</a>
+                </p>
 
     </div>
     <footer class="student-footer">
 
-    <div class="footer-content">
+        <div class="footer-content">
 
-        <div class="footer-brand">
+            <div class="footer-brand">
 
-            <i class="fa-solid fa-graduation-cap"></i>
+                <i class="fa-solid fa-graduation-cap"></i>
 
-            <span>
-                CampusConnect
-            </span>
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+            <p>
+                Student & Faculty Collaboration Portal
+            </p>
+
+            <p>
+                Developed & Designed by
+                <a href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/" target="_blank"
+                    rel="noopener noreferrer">
+                    Prince Mishra
+                </a>
+            </p>
+
+            <p class="footer-copyright">
+                © 2026 CampusConnect. All rights reserved.
+            </p>
 
         </div>
 
-        <p>
-            Student & Faculty Collaboration Portal
-        </p>
-
-        <p>
-            Developed & Designed by
-            <a
-                href="https://codewithprince-07.github.io/Prince-Mishra-Portfolio/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Prince Mishra
-            </a>
-        </p>
-
-        <p class="footer-copyright">
-            © 2026 CampusConnect. All rights reserved.
-        </p>
-
-    </div>
-
-</footer>
+    </footer>
 
 </body>
+
 </html>

@@ -8576,403 +8576,341 @@ body {
 
 }
 
-.quiz-attempt-page {
-    min-height: 100vh;
-    padding: 40px 20px;
-    background: linear-gradient(135deg, #f5f7ff, #eef2ff);
-    font-family: Arial, Helvetica, sans-serif;
+/* Forgot password link */
+.forgot-password {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+    margin-bottom: 22px;
 }
 
-.quiz-attempt-container {
-    width: 100%;
-    max-width: 950px;
-    margin: 0 auto;
-}
-
-.quiz-back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 25px;
-    padding: 10px 17px;
-    border-radius: 10px;
-    background: #ffffff;
-    color: #4f46e5;
-    text-decoration: none;
+.forgot-password a {
+    color: #287f7b;
     font-size: 14px;
     font-weight: 600;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: all 0.25s ease;
+    text-decoration: none;
+    transition: 0.2s ease;
 }
 
-.quiz-back-btn:hover {
-    transform: translateX(-3px);
-    background: #4f46e5;
-    color: #ffffff;
-    border-color: #4f46e5;
+.forgot-password a:hover {
+    color: #1d625f;
+    text-decoration: underline;
 }
 
-.quiz-attempt-header {
+/* Forgot password page */
+
+.forgot-password-page {
+    min-height: 100vh;
     display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 30px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    flex-direction: column;
+    background: #f7f5ee;
 }
 
-.quiz-attempt-icon {
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
+.forgot-password-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.forgot-password-card {
+    width: 100%;
+    max-width: 450px;
+    background: #fffdf8;
+    border: 1px solid #e2dfd5;
+    border-radius: 18px;
+    padding: 42px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.forgot-password-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    color: #ffffff;
-    font-size: 28px;
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+    background: #e7f3f1;
+    color: #287f7b;
+    font-size: 25px;
 }
 
-.quiz-label {
-    display: inline-block;
-    margin-bottom: 6px;
-    color: #4f46e5;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-}
-
-.quiz-attempt-header h1 {
-    margin: 0 0 7px;
-    color: #111827;
+.forgot-password-card h1 {
+    margin: 0 0 10px;
+    color: #102f3d;
     font-size: 30px;
-    line-height: 1.25;
-    font-weight: 800;
 }
 
-.quiz-attempt-header p {
-    margin: 0;
-    color: #6b7280;
+.forgot-password-card > p {
+    margin: 0 0 30px;
+    color: #667b86;
     font-size: 15px;
     line-height: 1.6;
 }
 
-.quiz-attempt-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
+.forgot-password-field {
+    text-align: left;
+    margin-bottom: 22px;
 }
 
-.quiz-attempt-info > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 110px;
-    padding: 18px;
-    text-align: center;
-    border-radius: 16px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-}
-
-.quiz-attempt-info i {
+.forgot-password-field label {
+    display: block;
     margin-bottom: 8px;
-    color: #4f46e5;
-    font-size: 20px;
-}
-
-.quiz-attempt-info span {
-    margin-bottom: 4px;
-    color: #6b7280;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.quiz-attempt-info strong {
-    color: #111827;
-    font-size: 20px;
-    font-weight: 800;
-}
-
-.quiz-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.quiz-question-card {
-    position: relative;
-    padding: 28px;
-    border-radius: 18px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.06);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.quiz-question-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-.question-number {
-    display: inline-flex;
-    align-items: center;
-    padding: 7px 12px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    background: #eef2ff;
-    color: #4f46e5;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.quiz-question-card h2 {
-    margin: 0 0 10px;
-    color: #1f2937;
-    font-size: 20px;
-    line-height: 1.5;
-    font-weight: 700;
-}
-
-.question-marks {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 20px;
-    color: #6b7280;
-    font-size: 13px;
+    color: #263f49;
+    font-size: 14px;
     font-weight: 600;
 }
 
-.question-marks i {
-    color: #f59e0b;
-}
-
-.quiz-options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.quiz-option {
+.forgot-password-input {
     display: flex;
     align-items: center;
     gap: 12px;
-    min-height: 55px;
-    padding: 12px 15px;
-    border: 1.5px solid #e5e7eb;
-    border-radius: 12px;
-    background: #fafafa;
-    color: #374151;
-    cursor: pointer;
+    height: 52px;
+    padding: 0 15px;
+    border: 1px solid #ccd7d9;
+    border-radius: 9px;
+    background: #f1f5fb;
+    transition: 0.2s ease;
+}
+
+.forgot-password-input:focus-within {
+    border-color: #287f7b;
+    box-shadow: 0 0 0 3px rgba(40, 127, 123, 0.1);
+}
+
+.forgot-password-input i {
+    color: #287f7b;
+}
+
+.forgot-password-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #263f49;
+    font-size: 14px;
+}
+
+.forgot-password-input input::placeholder {
+    color: #8999a0;
+}
+
+.forgot-password-btn {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 9px;
+    background: #287f7b;
+    color: white;
     font-size: 15px;
-    line-height: 1.4;
-    transition: all 0.2s ease;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
-.quiz-option:hover {
-    border-color: #818cf8;
-    background: #eef2ff;
+.forgot-password-btn:hover {
+    background: #216b68;
     transform: translateY(-1px);
 }
 
-.quiz-option input[type="radio"] {
-    width: 17px;
-    height: 17px;
-    margin: 0;
-    accent-color: #4f46e5;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.quiz-option:has(input[type="radio"]:checked) {
-    border-color: #4f46e5;
-    background: #eef2ff;
-    color: #312e81;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12);
-}
-
-.option-number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    border-radius: 9px;
-    background: #e5e7eb;
-    color: #374151;
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.quiz-option:has(input[type="radio"]:checked) .option-number {
-    background: #4f46e5;
-    color: #ffffff;
-}
-
-.quiz-submit-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 22px 25px;
-    margin-top: 5px;
-    border-radius: 18px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.06);
-}
-
-.quiz-submit-section p {
+.forgot-password-message {
     display: flex;
     align-items: center;
     gap: 9px;
-    margin: 0;
-    color: #6b7280;
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #e9f7ef;
+    color: #267447;
     font-size: 13px;
-    line-height: 1.5;
+    text-align: left;
 }
 
-.quiz-submit-section p i {
-    color: #4f46e5;
-    font-size: 16px;
-}
-
-.submit-quiz-btn {
+.forgot-password-back {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 9px;
-    min-width: 165px;
-    padding: 13px 22px;
-    border: none;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    color: #ffffff;
+    gap: 7px;
+    margin-top: 24px;
+    color: #287f7b;
     font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.forgot-password-back:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+
+    .forgot-password-container {
+        padding: 35px 15px;
+    }
+
+    .forgot-password-card {
+        padding: 30px 22px;
+        border-radius: 14px;
+    }
+
+    .forgot-password-card h1 {
+        font-size: 25px;
+    }
+
+}
+
+/* Reset password page */
+
+.reset-password-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f7f5ee;
+}
+
+.reset-password-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.reset-password-card {
+    width: 100%;
+    max-width: 450px;
+    background: #fffdf8;
+    border: 1px solid #e2dfd5;
+    border-radius: 18px;
+    padding: 42px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.reset-password-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e7f3f1;
+    color: #287f7b;
+    font-size: 25px;
+}
+
+.reset-password-card h1 {
+    margin: 0 0 10px;
+    color: #102f3d;
+    font-size: 30px;
+}
+
+.reset-password-card > p {
+    margin: 0 0 30px;
+    color: #667b86;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.reset-password-field {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.reset-password-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #263f49;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.reset-password-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding: 0 15px;
+    border: 1px solid #ccd7d9;
+    border-radius: 9px;
+    background: #f1f5fb;
+    transition: 0.2s ease;
+}
+
+.reset-password-input:focus-within {
+    border-color: #287f7b;
+    box-shadow: 0 0 0 3px rgba(40, 127, 123, 0.1);
+}
+
+.reset-password-input i {
+    color: #287f7b;
+}
+
+.reset-password-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #263f49;
+    font-size: 14px;
+}
+
+.reset-password-input input::placeholder {
+    color: #8999a0;
+}
+
+.reset-password-btn {
+    width: 100%;
+    height: 52px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 9px;
+    background: #287f7b;
+    color: white;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 7px 18px rgba(79, 70, 229, 0.25);
-    transition: all 0.25s ease;
+    transition: 0.2s ease;
 }
 
-.submit-quiz-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.32);
+.reset-password-btn:hover {
+    background: #216b68;
+    transform: translateY(-1px);
 }
 
-.submit-quiz-btn:active {
-    transform: translateY(0);
+.reset-password-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 24px;
+    color: #287f7b;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
 }
 
-@media (max-width: 768px) {
-    .quiz-attempt-page {
-        padding: 25px 15px;
-    }
-
-    .quiz-attempt-header {
-        align-items: flex-start;
-        padding: 22px;
-    }
-
-    .quiz-attempt-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 23px;
-    }
-
-    .quiz-attempt-header h1 {
-        font-size: 24px;
-    }
-
-    .quiz-attempt-info {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .quiz-options {
-        grid-template-columns: 1fr;
-    }
-
-    .quiz-question-card {
-        padding: 22px;
-    }
-
-    .quiz-submit-section {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .submit-quiz-btn {
-        width: 100%;
-    }
+.reset-password-back:hover {
+    text-decoration: underline;
 }
 
-@media (max-width: 520px) {
-    .quiz-attempt-page {
-        padding: 18px 10px;
+@media (max-width: 600px) {
+
+    .reset-password-container {
+        padding: 35px 15px;
     }
 
-    .quiz-back-btn {
-        margin-bottom: 18px;
+    .reset-password-card {
+        padding: 30px 22px;
+        border-radius: 14px;
     }
 
-    .quiz-attempt-header {
-        flex-direction: column;
-        gap: 14px;
-        padding: 20px;
-        border-radius: 16px;
+    .reset-password-card h1 {
+        font-size: 25px;
     }
 
-    .quiz-attempt-header h1 {
-        font-size: 21px;
-    }
-
-    .quiz-attempt-header p {
-        font-size: 13px;
-    }
-
-    .quiz-attempt-info {
-        grid-template-columns: 1fr;
-    }
-
-    .quiz-attempt-info > div {
-        min-height: 85px;
-    }
-
-    .quiz-question-card {
-        padding: 18px;
-        border-radius: 15px;
-    }
-
-    .quiz-question-card h2 {
-        font-size: 17px;
-    }
-
-    .quiz-option {
-        padding: 11px 12px;
-        font-size: 14px;
-    }
-
-    .quiz-submit-section {
-        padding: 18px;
-        border-radius: 15px;
-    }
-
-    .quiz-submit-section p {
-        align-items: flex-start;
-        font-size: 12px;
-    }
 }
