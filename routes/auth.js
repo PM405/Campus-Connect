@@ -206,11 +206,23 @@ router.post(
 
             await user.save();
 
+            const protocol =
+                req.get("x-forwarded-proto") ||
+                req.protocol;
+
+            const host =
+                req.get("x-forwarded-host") ||
+                req.get("host");
+
+            const appUrl =
+                `${protocol}://${host}`;
+
             const resetUrl =
-                `${process.env.APP_URL}/reset-password/${resetToken}`;
+                `${appUrl}/reset-password/${resetToken}`;
 
             await transporter.sendMail({
-                from: `"CampusConnect" <${process.env.EMAIL_USER}>`,
+                from:
+                    `"CampusConnect" <${process.env.EMAIL_USER}>`,
                 to: user.email,
                 subject:
                     "CampusConnect - Password Reset",
@@ -249,15 +261,17 @@ router.post(
                             text-align:center;
                             margin:30px 0;
                         ">
-                            <a href="${resetUrl}"
-                               style="
-                               background:#2563eb;
-                               color:white;
-                               padding:12px 25px;
-                               text-decoration:none;
-                               border-radius:8px;
-                               display:inline-block;
-                               ">
+                            <a
+                                href="${resetUrl}"
+                                style="
+                                    background:#2563eb;
+                                    color:white;
+                                    padding:12px 25px;
+                                    text-decoration:none;
+                                    border-radius:8px;
+                                    display:inline-block;
+                                "
+                            >
                                 Reset Password
                             </a>
                         </div>
